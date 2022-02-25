@@ -15,9 +15,9 @@ class MatchScreen extends StatefulWidget {
 class _MatchScreenState extends State<MatchScreen> {
   late Future<Participants> pars;
 
-  String notFound = "매칭중인 게임을 찾을 수 없습니다.";
-  String matchTypeError = "게임 타입이 올바르지 않습니다.";
-  String mapTypeError = "소환사의 협곡 정보만 불러올 수 있습니다.";
+  String notFound = "Cannot found match.";
+  String matchTypeError = "Game type error";
+  String mapTypeError = "Only Summoner's Rift can be loaded";
   bool pressColor = false;
   bool pressText = false;
 
@@ -179,7 +179,7 @@ class _MatchScreenState extends State<MatchScreen> {
                       );
                     } else {
                       return AlertDialog(
-                        title: Text("에러"),
+                        title: Text("Error"),
                         content: Text(
                           mapTypeError,
                           maxLines: 2,
@@ -197,7 +197,7 @@ class _MatchScreenState extends State<MatchScreen> {
                     }
                   } else {
                     return AlertDialog(
-                      title: Text("에러"),
+                      title: Text("Error"),
                       content: Text(
                         notFound,
                         maxLines: 2,
@@ -223,13 +223,13 @@ class _MatchScreenState extends State<MatchScreen> {
 
   _matchType(int mapId, int queueType) {
     if (queueType == 0) {
-      return Text("커스텀");
+      return Text("Custom game");
     } else if (queueType == 420) {
-      return Text("솔로 랭크");
+      return Text("Solo queue");
     } else if (queueType == 430) {
-      return Text("일반");
+      return Text("Normal game");
     } else if (queueType == 440) {
-      return Text("자유 랭크");
+      return Text("Flex queue");
     } else {
       return alert(context, matchTypeError, 200);
     }
