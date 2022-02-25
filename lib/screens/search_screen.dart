@@ -11,8 +11,8 @@ class SearchSummoner extends StatefulWidget {
 
 class SearchSummonerState extends State<SearchSummoner> {
   final TextEditingController _controller = TextEditingController();
-  String empty = "소환사 이름을 입력하세요.";
-  String notFound = "소환사를 찾을 수 없습니다.";
+  String empty = "Enter the summoner name.";
+  String notFound = "Cannot found.";
 
   @override
   void initState() {
@@ -41,7 +41,7 @@ class SearchSummonerState extends State<SearchSummoner> {
                 filled: true,
                 fillColor: Colors.white,
                 hintStyle: TextStyle(fontSize: 16),
-                hintText: "소환사 이름",
+                hintText: "Summoner Name",
                 suffixIcon: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   mainAxisSize: MainAxisSize.min,
