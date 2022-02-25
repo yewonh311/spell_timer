@@ -25,7 +25,7 @@ void alert(BuildContext context, String alertMessage, int statusCode) {
         );
       } else {
         return AlertDialog(
-          title: Text("EROOR"),
+          title: Text("ERROR"),
           content: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
