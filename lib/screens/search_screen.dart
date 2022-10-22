@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'dart:convert';
+import 'package:spell_checker/screens/match_screen.dart';
 import 'package:spell_checker/models/summoner_data_by_name.dart';
 import 'package:spell_checker/widgets/pop_up.dart';
 
@@ -11,8 +11,9 @@ class SearchSummoner extends StatefulWidget {
 
 class SearchSummonerState extends State<SearchSummoner> {
   final TextEditingController _controller = TextEditingController();
-  String empty = "Enter the summoner name.";
-  String notFound = "Cannot found.";
+  String empty = "소환사 이름을 입력하세요.";
+  String notFound = "소환사를 찾을 수 없습니다.";
+  String notaccessible = "잘못된 접근입니다.";
 
   @override
   void initState() {
@@ -41,7 +42,7 @@ class SearchSummonerState extends State<SearchSummoner> {
                 filled: true,
                 fillColor: Colors.white,
                 hintStyle: TextStyle(fontSize: 16),
-                hintText: "Summoner Name",
+                hintText: "소환사 이름",
                 suffixIcon: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   mainAxisSize: MainAxisSize.min,
@@ -72,11 +73,17 @@ class SearchSummonerState extends State<SearchSummoner> {
   _navigate(var text) async {
     if (text.isNotEmpty) {
       var response = await getSummonerInfo(summonerName: text);
-      final Map<String, dynamic>? data = json.decode(response.body);
+      final Map<String, dynamic> data = json.decode(response.body);
       if (response.statusCode == 200) {
-        Get.toNamed(
-            '/match/${data?["id"]}?sumName=${data?["name"]}&iconId=${data?["profileIconId"]}&sumLevel=${data?["summonerLevel"]}');
-        print(data?["profileIconId"]);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => MatchScreen(
+                      encryptIdFromSearch: data["id"],
+                      summonerNameFromSearch: data["name"],
+                      profileIconIdFromSearch: data["profileIconId"],
+                      summonerLevelFromSearch: data["summonerLevel"],
+                    )));
       } else {
         alert(context, notFound, response.statusCode);
       }
