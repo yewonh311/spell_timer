@@ -1,5 +1,8 @@
 # spell_checker
+
 A new Flutter project.
+
+
 Two of members tried to make Spell Checker(timer) application on game, League of Legends.
 We used Riot Developer API to check our summoners, and enemy summoners, and also spells, on-going game.
 
